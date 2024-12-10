@@ -44,7 +44,7 @@ fun LoginScreen() {
 
     // Retrofit setup
     val retrofit = Retrofit.Builder()
-        .baseUrl("https://sns-server-5urj.onrender.com") // Use localhost for emulator
+        .baseUrl("http://10.0.2.2:8000/") // Use localhost for emulator
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
