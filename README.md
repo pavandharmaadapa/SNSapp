@@ -1,56 +1,53 @@
-**Step-by-StepProcess**
+**Step-by-Step Process**
 
-**1\. Set Upthe FastAPI Server**
+***
 
-**1.1Install Python**
+**1. Set Up the FastAPI Server**
 
-*   Download and install Python from [python.org](https://www.python.org/downloads/).
-    
+**1.1 Install Python**
 
-*   Verify installation:
-    
-
-bash
-
-Copy code
-
-python--version
-
-pip--version
-
-**1.2Navigate to the Server Directory**
-
-*   Open your terminal or command prompt.
-    
-
-*   Navigate to the directory where the server code is located:
-    
+- Download and install Python from [python.org](https://www.python.org/downloads/).
+- Verify installation:
 
 bash
 
 Copy code
 
-cdD:\\ztx-android\\sns\_server
+python --version
 
-**1.3 SetUp a Virtual Environment**
+pip --version
 
-*   Create a virtual environment:
-    
+**1.2 Navigate to the Server Directory**
 
-bash
-
-Copy code
-
-python -mvenv venv
-
-*   Activate the virtual environment:
-    
+- Open your terminal or command prompt.
+- Navigate to the directory where the server code is located:
 
 bash
 
 Copy code
 
-venv\\Scripts\\activate
+cd D:\ztx-android\sns\_server
+
+**1.3 Set Up a Virtual Environment**
+
+- Create a virtual environment:
+
+bash
+
+Copy code
+
+python -m venv venv
+
+- Activate the virtual environment:
+  - **Windows**:
+
+bash
+
+Copy code
+
+venv\Scripts\activate
+
+- - **macOS/Linux**:
 
 bash
 
@@ -58,84 +55,91 @@ Copy code
 
 source venv/bin/activate
 
-**1.4Install FastAPI and Uvicorn**
+**1.4 Install FastAPI and Uvicorn**
 
-*   Install the necessary packages:
-    
+- Install the necessary packages:
 
 bash
 
 Copy code
 
-pip installfastapi uvicorn
+pip install fastapi uvicorn
 
-**1.5Create or Verify the Server File (\_\_main\_\_.py)**
+**1.5 Create or Verify the Server File (\_\_main\_\_.py)**
 
-*   Ensure your \_\_main\_\_.py file looks like this:
-    
+- Ensure your \_\_main\_\_.py file looks like this:
 
 python
 
 Copy code
 
-from fastapiimport FastAPI
+from fastapi import FastAPI
 
-frompydantic import BaseModel
+from pydantic import BaseModel
 
-app =FastAPI()
+ 
 
-classLoginRequest(BaseModel):
+app = FastAPI()
+
+ 
+
+class LoginRequest(BaseModel):
 
     username: str
 
     password: str
 
+ 
+
 @app.get("/")
 
-async defroot():
+async def root():
 
-    return {"message": "Hello,world!"}
+    return {"message": "Hello, world!"}
+
+ 
 
 @app.post("/login/")
 
-async deflogin(request: LoginRequest):
+async def login(request: LoginRequest):
 
-    if request.username == "admin"and request.password == "password":
+    if request.username == "admin" and request.password == "password":
 
-        return {"message":"Login successful"}
+        return {"message": "Login successful"}
 
-    return {"message": "Invalidcredentials"}
+    return {"message": "Invalid credentials"}
 
-**1.6 Runthe Server**
+**1.6 Run the Server**
 
-*   Run the server using Uvicorn:
-    
+- Run the server using Uvicorn:
 
 bash
 
 Copy code
 
-uvicornsns\_server.\_\_main\_\_:app --reload
+uvicorn sns\_server.\_\_main\_\_:app --reload
 
-*   If successful, you’ll see:
-    
+- If successful, you’ll see:
 
 vbnet
 
 Copy code
 
-INFO:     Uvicorn running on http://127.0.0.1:8000(Press CTRL+C to quit)
+INFO:     Uvicorn running on http\://127.0.0.1:8000 (Press CTRL+C to quit)
 
-**1.7 Testthe Server**
+**1.7 Test the Server**
 
-*   Use a browser or Postman to verify the endpoints:
-    
+- Use a browser or Postman to verify the endpoints:
+  - **GET /**:
 
 json
 
 Copy code
 
-{"message":"Hello, world!"}
+{"message": "Hello, world!"}
+
+- - **POST /login/**:
+    - Request Body:
 
 json
 
@@ -149,102 +153,103 @@ Copy code
 
 }
 
+- - - Response:
+
 json
 
 Copy code
 
-{"message":"Login successful"}
+{"message": "Login successful"}
 
-**2\. Createthe Android App**
+***
 
-**2.1Install Android Studio**
+**2. Create the Android App**
 
-*   Download and install Android Studio from [developer.android.com](https://developer.android.com/studio).
-    
+**2.1 Install Android Studio**
 
-**2.2Create a New Project**
+- Download and install Android Studio from [developer.android.com](https://developer.android.com/studio).
 
-2.  Open Android Studio.
-    
+**2.2 Create a New Project**
 
-4.  Click **File > New > New Project**.
-    
+1. Open Android Studio.
+2. Click **File > New > New Project**.
+3. Choose **Empty Compose Activity**.
+4. Set the project name, package name, and save location. Click **Finish**.
 
-6.  Choose **Empty Compose Activity**.
-    
+**2.3 Add Retrofit Dependency**
 
-8.  Set the project name, package name, and save location. Click **Finish**.
-    
-
-**2.3 AddRetrofit Dependency**
-
-2.  Open the build.gradle file in the app module.
-    
-
-4.  Add the following dependencies under dependencies:
-    
+1. Open the build.gradle file in the app module.
+2. Add the following dependencies under dependencies:
 
 **groovy**
 
-implementation'com.squareup.retrofit2:retrofit:2.9.0'
+implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
-implementation'com.squareup.retrofit2:converter-gson:2.9.0'
+implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-2.  Sync the project by clicking **Sync Now**.
-    
+3. Sync the project by clicking **Sync Now**.
 
-**3.Implement the App Code**
+***
 
-**3.1Replace MainActivity.kt**
+**3. Implement the App Code**
 
-*   Replace the contents of MainActivity.kt with the following code:
-    
+**3.1 Replace MainActivity.kt**
+
+- Replace the contents of MainActivity.kt with the following code:
 
 **Kotlin**
 
-packagecom.example.snsapp
+ 
 
-importandroid.os.Bundle
+ 
 
-importandroid.util.Log
+package com.example.snsapp
 
-importandroidx.activity.ComponentActivity
+ 
 
-importandroidx.activity.compose.setContent
+import android.os.Bundle
 
-importandroidx.compose.foundation.layout.\*
+import android.util.Log
 
-importandroidx.compose.material3.\*
+import androidx.activity.ComponentActivity
 
-importandroidx.compose.runtime.\*
+import androidx.activity.compose.setContent
 
-importandroidx.compose.ui.Modifier
+import androidx.compose.foundation.layout.\*
 
-importandroidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.material3.\*
 
-importandroidx.compose.ui.text.style.TextAlign
+import androidx.compose.runtime.\*
 
-importandroidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
 
-importcom.example.snsapp.ui.theme.SNSappTheme
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 
-importkotlinx.coroutines.CoroutineScope
+import androidx.compose.ui.text.style.TextAlign
 
-importkotlinx.coroutines.Dispatchers
+import androidx.compose.ui.unit.dp
 
-importkotlinx.coroutines.launch
+import com.example.snsapp.ui.theme.SNSappTheme
 
-importretrofit2.Retrofit
+import kotlinx.coroutines.CoroutineScope
 
-importretrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.Dispatchers
 
-importretrofit2.http.Body
+import kotlinx.coroutines.launch
 
-importretrofit2.http.POST
+import retrofit2.Retrofit
 
-classMainActivity : ComponentActivity() {
+import retrofit2.converter.gson.GsonConverterFactory
 
-    override fun onCreate(savedInstanceState:Bundle?) {
+import retrofit2.http.Body
+
+import retrofit2.http.POST
+
+ 
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
@@ -254,9 +259,9 @@ classMainActivity : ComponentActivity() {
 
                 Surface(
 
-                    modifier =Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
 
-                    color =MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background
 
                 ) {
 
@@ -272,27 +277,35 @@ classMainActivity : ComponentActivity() {
 
 }
 
+ 
+
 @Composable
 
-funLoginScreen() {
+fun LoginScreen() {
 
-    var username by remember {mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
 
-    var password by remember {mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
-    var responseText by remember {mutableStateOf("Enter credentials and click Login.") }
+    var responseText by remember { mutableStateOf("Enter credentials and click Login.") }
+
+ 
 
     // Retrofit setup
 
     val retrofit = Retrofit.Builder()
 
-       .baseUrl("http://10.0.2.2:8000/") // Use localhost foremulator
+        .baseUrl("http\://10.0.2.2:8000/") // Use localhost for emulator
 
-       .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create())
 
         .build()
 
-    val apiService =retrofit.create(ApiService::class.java)
+ 
+
+    val apiService = retrofit.create(ApiService::class.java)
+
+ 
 
     Column(
 
@@ -302,9 +315,9 @@ funLoginScreen() {
 
             .padding(16.dp),
 
-        verticalArrangement =Arrangement.Center,
+        verticalArrangement = Arrangement.Center,
 
-        horizontalAlignment =androidx.compose.ui.Alignment.CenterHorizontally
+        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
 
     ) {
 
@@ -314,13 +327,17 @@ funLoginScreen() {
 
             onValueChange = { username = it },
 
-            label = {Text("Username") },
+            label = { Text("Username") },
 
             modifier = Modifier.fillMaxWidth()
 
         )
 
-        Spacer(modifier =Modifier.height(16.dp))
+ 
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+ 
 
         TextField(
 
@@ -328,35 +345,39 @@ funLoginScreen() {
 
             onValueChange = { password = it },
 
-            label = {Text("Password") },
+            label = { Text("Password") },
 
-            visualTransformation =PasswordVisualTransformation(),
+            visualTransformation = PasswordVisualTransformation(),
 
             modifier = Modifier.fillMaxWidth()
 
         )
 
-        Spacer(modifier =Modifier.height(16.dp))
+ 
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+ 
 
         Button(
 
             onClick = {
 
-               CoroutineScope(Dispatchers.IO).launch {
+                CoroutineScope(Dispatchers.IO).launch {
 
                     try {
 
-                        val request =LoginRequest(username, password)
+                        val request = LoginRequest(username, password)
 
-                        val response =apiService.login(request)
+                        val response = apiService.login(request)
 
-                        responseText ="Response: ${response.message}"
+                        responseText = "Response: ${response.message}"
 
                     } catch (e: Exception) {
 
-                        responseText ="Error: ${e.message}"
+                        responseText = "Error: ${e.message}"
 
-                       Log.e("LoginScreen", "Error logging in", e)
+                        Log.e("LoginScreen", "Error logging in", e)
 
                     }
 
@@ -372,7 +393,11 @@ funLoginScreen() {
 
         }
 
-        Spacer(modifier =Modifier.height(16.dp))
+ 
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+ 
 
         Text(
 
@@ -388,17 +413,21 @@ funLoginScreen() {
 
 }
 
-// RetrofitAPI Service
+ 
 
-interfaceApiService {
+// Retrofit API Service
+
+interface ApiService {
 
     @POST("/login/")
 
-    suspend fun login(@Body request: LoginRequest):LoginResponse
+    suspend fun login(@Body request: LoginRequest): LoginResponse
 
 }
 
-data classLoginRequest(
+ 
+
+data class LoginRequest(
 
     val username: String,
 
@@ -406,38 +435,38 @@ data classLoginRequest(
 
 )
 
-data classLoginResponse(
+ 
+
+data class LoginResponse(
 
     val message: String
 
 )
 
-**4\. Runthe App**
+***
 
-2.  Start the FastAPI server:
-    
+**4. Run the App**
+
+1. Start the FastAPI server:
 
 bash
 
 Copy code
 
-uvicornsns\_server.\_\_main\_\_:app --reload
+uvicorn sns\_server.\_\_main\_\_:app --reload
 
-2.  Run the app on an emulator or physical device from Android Studio.
-    
+2. Run the app on an emulator or physical device from Android Studio.
+3. Enter the username (admin) and password (password) and click **Login**.
+4. Observe the response:
+   - **Valid Credentials**: Response: Login successful.
+   - **Invalid Credentials**: Response: Invalid credentials.
 
-4.  Enter the username (admin) and password (password) and click **Login**.
-    
+***
 
-6.  Observe the response:
-    
+**5. Test and Debug**
 
-**5\. Testand Debug**
+1. Use **Logcat** in Android Studio to debug errors.
+2. Ensure the baseUrl in the app matches the FastAPI server's address.
+3. For network issues, ensure you're using http\://10.0.2.2:8000/ when testing on an emulator.
 
-2.  Use **Logcat** in Android Studio to debug errors.
-    
-
-4.  Ensure the baseUrl in the app matches the FastAPI server's address.
-    
-
-6.  For network issues, ensure you're using http://10.0.2.2:8000/ when testing on an emulator.
+ 
