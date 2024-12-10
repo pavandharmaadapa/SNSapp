@@ -9,9 +9,7 @@
 - Download and install Python from [python.org](https://www.python.org/downloads/).
 - Verify installation:
 
-bash
-
-Copy code
+**bash**
 
 python --version
 
@@ -22,9 +20,9 @@ pip --version
 - Open your terminal or command prompt.
 - Navigate to the directory where the server code is located:
 
-bash
+**bash**
 
-Copy code
+
 
 cd D:\ztx-android\sns\_server
 
@@ -32,26 +30,26 @@ cd D:\ztx-android\sns\_server
 
 - Create a virtual environment:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 python -m venv venv
 
 - Activate the virtual environment:
   - **Windows**:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 venv\Scripts\activate
 
 - - **macOS/Linux**:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 source venv/bin/activate
 
@@ -59,9 +57,9 @@ source venv/bin/activate
 
 - Install the necessary packages:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 pip install fastapi uvicorn
 
@@ -71,7 +69,7 @@ pip install fastapi uvicorn
 
 python
 
-Copy code
+ 
 
 from fastapi import FastAPI
 
@@ -113,9 +111,9 @@ async def login(request: LoginRequest):
 
 - Run the server using Uvicorn:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 uvicorn sns\_server.\_\_main\_\_:app --reload
 
@@ -123,7 +121,7 @@ uvicorn sns\_server.\_\_main\_\_:app --reload
 
 vbnet
 
-Copy code
+ 
 
 INFO:     Uvicorn running on http\://127.0.0.1:8000 (Press CTRL+C to quit)
 
@@ -134,7 +132,7 @@ INFO:     Uvicorn running on http\://127.0.0.1:8000 (Press CTRL+C to quit)
 
 json
 
-Copy code
+ 
 
 {"message": "Hello, world!"}
 
@@ -143,7 +141,7 @@ Copy code
 
 json
 
-Copy code
+ 
 
 {
 
@@ -157,7 +155,7 @@ Copy code
 
 json
 
-Copy code
+ 
 
 {"message": "Login successful"}
 
@@ -449,9 +447,9 @@ data class LoginResponse(
 
 1. Start the FastAPI server:
 
-bash
+ **bash**
 
-Copy code
+ 
 
 uvicorn sns\_server.\_\_main\_\_:app --reload
 
